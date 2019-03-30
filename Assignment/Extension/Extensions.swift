@@ -9,6 +9,7 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 extension UserList{
     
@@ -31,6 +32,7 @@ extension UserList{
                 case .success(let data) :
                     DispatchQueue.main.async {
                         
+                        SVProgressHUD.dismiss()
                         guard let userData = data else{
                             return
                         }
@@ -39,6 +41,8 @@ extension UserList{
                         self.userListTableView.reloadData()
                         if(userData.count > 0){
                             self.previousPageNumber = self.currentPageNumber
+                        }else{
+                            self.showToast(message: "​there​ ​is​ ​no​ ​more​ ​items​ ​available")
                         }
                         
                        
@@ -51,7 +55,7 @@ extension UserList{
                     print(error.localizedDescription)
                     self.activityIndicator.stopAnimating()
                     self.showToast(message: error.localizedDescription)
-                    
+                    SVProgressHUD.dismiss()
                     break
                     
                 }
@@ -93,14 +97,11 @@ extension UserList:UITableViewDataSource{
         self.userName.text = user.owner.login
         userCell.name.text = user.name
         userCell.comments.text = user.description
-//        if(user.owner.avatarURL.count > 0){
-//            do{
-//                userCell.userImage?.image = UIImage.init(data: try Data.init(contentsOf: URL(string: user.owner.avatarURL)!), scale: 0.1)
-//            }catch{
-//
-//            }
-//
-//        }
+        if(user.owner.avatarURL.count > 0){
+            
+           userCell.userImage.loadImageUsingCacheWithURLString(user.owner.avatarURL, placeHolder: nil)
+            
+        }
         
         if((user.language?.count ?? 0) > 0){
              userCell.lblTech.text = user.language
@@ -161,4 +162,35 @@ extension UIViewController
         
     }
     
+}
+
+let imageCache = NSCache<NSString, UIImage>()
+extension UIImageView {
+    func loadImageUsingCacheWithURLString(_ URLString: String, placeHolder: UIImage?) {
+        self.image = nil
+        if let cachedImage = imageCache.object(forKey: NSString(string: URLString)) {
+            self.image = cachedImage
+            return
+        }
+        if let url = URL(string: URLString) {
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                //print("RESPONSE FROM API: \(response)")
+                if error != nil {
+                    print("ERROR LOADING IMAGES FROM URL: \(String(describing: error))")
+                    DispatchQueue.main.async {
+                        self.image = placeHolder
+                    }
+                    return
+                }
+                DispatchQueue.main.async {
+                    if let data = data {
+                        if let downloadedImage = UIImage(data: data) {
+                            imageCache.setObject(downloadedImage, forKey: NSString(string: URLString))
+                            self.image = downloadedImage
+                        }
+                    }
+                }
+            }).resume()
+        }
+    }
 }

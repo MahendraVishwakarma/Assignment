@@ -8,6 +8,7 @@
 
 
 import UIKit
+import SVProgressHUD
 
 class UserList: UIViewController {
 
@@ -22,12 +23,10 @@ class UserList: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userListTableView.rowHeight = UITableView.automaticDimension
-        userListTableView.estimatedRowHeight =  100
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        SVProgressHUD.show()
         getDataFromServer(limit: 1)
     }
     
