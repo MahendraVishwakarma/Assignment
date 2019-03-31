@@ -22,6 +22,7 @@
 		80785E4E224FF2E400F34DCD /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80785E4D224FF2E400F34DCD /* Enums.swift */; };
 		80785E50224FF44000F34DCD /* NoInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80785E4F224FF44000F34DCD /* NoInternetConnection.swift */; };
 		80785E53224FFAFE00F34DCD /* GitUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80785E52224FFAFE00F34DCD /* GitUsers.swift */; };
+		80AB67B522506C0800D3B183 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AB67B422506C0800D3B183 /* URLRequest.swift */; };
 		933CD4D85A6FFDBDBD53E185 /* Pods_Assignment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA28E2CE21B8C7ADF37ADA5 /* Pods_Assignment.framework */; };
 		A3EDE498ECEA790308ED9DA0 /* Pods_AssignmentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC09A2E279ED36A4206BD82 /* Pods_AssignmentUITests.framework */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		80785E4D224FF2E400F34DCD /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		80785E4F224FF44000F34DCD /* NoInternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnection.swift; sourceTree = "<group>"; };
 		80785E52224FFAFE00F34DCD /* GitUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitUsers.swift; sourceTree = "<group>"; };
+		80AB67B422506C0800D3B183 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		B310976EAAA00BBCDD35B34C /* Pods-Assignment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assignment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Assignment/Pods-Assignment.debug.xcconfig"; sourceTree = "<group>"; };
 		B617E056F5F78197F0CEA401 /* Pods-AssignmentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssignmentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AssignmentTests/Pods-AssignmentTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				80785E43224FD72300F34DCD /* WebServices.swift */,
+				80AB67B422506C0800D3B183 /* URLRequest.swift */,
 			);
 			path = "Web Services";
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				80785E4E224FF2E400F34DCD /* Enums.swift in Sources */,
 				80785E44224FD72300F34DCD /* WebServices.swift in Sources */,
 				80785E0E224FCB0F00F34DCD /* AppDelegate.swift in Sources */,
+				80AB67B522506C0800D3B183 /* URLRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

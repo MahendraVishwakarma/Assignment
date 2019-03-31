@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// custom cell 
 class UserListCell: UITableViewCell {
     
     @IBOutlet weak var userImage: UIImageView!
