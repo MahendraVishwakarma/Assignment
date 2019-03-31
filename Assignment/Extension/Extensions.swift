@@ -17,7 +17,6 @@ extension UserList{
     
     func getDataFromServer(limit:Int){
         isFetched = false
-        
         //self.userListTableView.tableFooterView = UIView(frame: .zero)
         WebServices.requestHttp(pageNumber: limit, method: HttpsMethod.Get, decode: { json -> GitUsers? in
             
@@ -84,17 +83,11 @@ extension UserList{
     }
     
     func getDataFromRealm(){
-         do{
-            let data = try DBManager.sharedInstance.realmObject.objects(MyRealObject.self)
+        
+            let data =  DBManager.sharedInstance.realmObject.objects(MyRealObject.self)
             let arr = data.toArray(type: MyRealObject.self)
             self.GitUsers = arr as NSArray
             self.userListTableView.reloadData()
-            
-            
-         }catch let err{
-           print(err.localizedDescription)
-        }
-    
     }
 }
    
