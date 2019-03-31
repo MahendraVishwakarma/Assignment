@@ -31,7 +31,7 @@ public class WebServices{
     // creates request from fetch data from server.
     class func requestHttp<T:Decodable>(pageNumber:Int,method:HttpsMethod, decode:@escaping(Decodable) -> T?, completion: @escaping (Result<T?,APIError>)->()){
         
-        if(!isConnectedToNetwork())
+        if(!isConnectedToNetwork() && DBManager.sharedInstance.getData().count <= 0)
         {
             openNoConnectionView()
             completion(Result.failure(APIError.failedRequest("no internet connection")))

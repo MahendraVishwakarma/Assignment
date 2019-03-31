@@ -15,8 +15,11 @@ import Realm
 
 extension UserList{
     
+   
+    
     func getDataFromServer(limit:Int){
         isFetched = false
+         
         //self.userListTableView.tableFooterView = UIView(frame: .zero)
         WebServices.requestHttp(pageNumber: limit, method: HttpsMethod.Get, decode: { json -> GitUsers? in
             
@@ -69,6 +72,7 @@ extension UserList{
                     break
                     
                 case .failure(let error):
+                    self.getDataFromRealm()
                     print(error.localizedDescription)
                     self.activityIndicator.stopAnimating()
                     self.showToast(message: error.localizedDescription)
@@ -83,9 +87,7 @@ extension UserList{
     }
     
     func getDataFromRealm(){
-        
-            let data =  DBManager.sharedInstance.realmObject.objects(MyRealObject.self)
-            let arr = data.toArray(type: MyRealObject.self)
+            let arr = DBManager.sharedInstance.getData()
             self.GitUsers = arr as NSArray
             self.userListTableView.reloadData()
     }

@@ -25,6 +25,13 @@ class DBManager {
         }
         
     }
+    
+    func getData() -> NSArray{
+        let data =  DBManager.sharedInstance.realmObject.objects(MyRealObject.self)
+        let arr = data.toArray(type: MyRealObject.self)
+        
+        return arr as NSArray
+    }
 
 }
 

@@ -30,6 +30,7 @@ class UserList: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         SVProgressHUD.show()
+        self.getDataFromRealm()
         getDataFromServer(limit: 1)
     }
     
