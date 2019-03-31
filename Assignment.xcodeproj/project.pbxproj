@@ -23,6 +23,7 @@
 		80785E50224FF44000F34DCD /* NoInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80785E4F224FF44000F34DCD /* NoInternetConnection.swift */; };
 		80785E53224FFAFE00F34DCD /* GitUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80785E52224FFAFE00F34DCD /* GitUsers.swift */; };
 		80AB67B522506C0800D3B183 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AB67B422506C0800D3B183 /* URLRequest.swift */; };
+		80AB67B82250A0BB00D3B183 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AB67B72250A0BB00D3B183 /* Database.swift */; };
 		933CD4D85A6FFDBDBD53E185 /* Pods_Assignment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA28E2CE21B8C7ADF37ADA5 /* Pods_Assignment.framework */; };
 		A3EDE498ECEA790308ED9DA0 /* Pods_AssignmentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC09A2E279ED36A4206BD82 /* Pods_AssignmentUITests.framework */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 		80785E4F224FF44000F34DCD /* NoInternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnection.swift; sourceTree = "<group>"; };
 		80785E52224FFAFE00F34DCD /* GitUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitUsers.swift; sourceTree = "<group>"; };
 		80AB67B422506C0800D3B183 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		80AB67B72250A0BB00D3B183 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		B310976EAAA00BBCDD35B34C /* Pods-Assignment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assignment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Assignment/Pods-Assignment.debug.xcconfig"; sourceTree = "<group>"; };
 		B617E056F5F78197F0CEA401 /* Pods-AssignmentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssignmentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AssignmentTests/Pods-AssignmentTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +132,7 @@
 		80785E0C224FCB0F00F34DCD /* Assignment */ = {
 			isa = PBXGroup;
 			children = (
+				80AB67B62250A09600D3B183 /* Database Realm */,
 				80785E51224FFAEE00F34DCD /* Models */,
 				80785E4C224FF2D500F34DCD /* Enums */,
 				80785E49224FF1B500F34DCD /* Comman Files */,
@@ -220,6 +223,14 @@
 				80785E52224FFAFE00F34DCD /* GitUsers.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		80AB67B62250A09600D3B183 /* Database Realm */ = {
+			isa = PBXGroup;
+			children = (
+				80AB67B72250A0BB00D3B183 /* Database.swift */,
+			);
+			path = "Database Realm";
 			sourceTree = "<group>";
 		};
 		A5298B420E1310A63F346824 /* Frameworks */ = {
@@ -383,10 +394,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Assignment/Pods-Assignment-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80785E53224FFAFE00F34DCD /* GitUsers.swift in Sources */,
+				80AB67B82250A0BB00D3B183 /* Database.swift in Sources */,
 				80785E4B224FF1C800F34DCD /* Constants.swift in Sources */,
 				80785E46224FD76700F34DCD /* UserListCell.swift in Sources */,
 				80785E40224FD66C00F34DCD /* UserList.swift in Sources */,

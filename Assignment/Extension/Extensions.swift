@@ -10,6 +10,8 @@
 import Foundation
 import UIKit
 import SVProgressHUD
+import RealmSwift
+import Realm
 
 extension UserList{
     
@@ -36,9 +38,25 @@ extension UserList{
                         guard let userData = data else{
                             return
                         }
+                        for user in userData{
+                            do{
+                                try DBManager.sharedInstance.realmObject.write {
+                                    let myReal = MyRealObject()
+                                    myReal.id = user.id
+                                    myReal.myStruct = user
+                                    DBManager.sharedInstance.realmObject.add(myReal, update: true)
+                                    
+                                }
+                            }catch let err{
+                                print(err.localizedDescription)
+                            }
+                           
+                        }
+                        
+                        self.getDataFromRealm()
+                        
                         self.activityIndicator.stopAnimating()
-                        self.GitUsers.addObjects(from: userData)
-                        self.userListTableView.reloadData()
+                        
                         if(userData.count > 0){
                             self.previousPageNumber = self.currentPageNumber
                         }else{
@@ -63,6 +81,20 @@ extension UserList{
                 
             }
         }
+    }
+    
+    func getDataFromRealm(){
+         do{
+            let data = try DBManager.sharedInstance.realmObject.objects(MyRealObject.self)
+            let arr = data.toArray(type: MyRealObject.self)
+            self.GitUsers = arr as NSArray
+            self.userListTableView.reloadData()
+            
+            
+         }catch let err{
+           print(err.localizedDescription)
+        }
+    
     }
 }
    
@@ -92,17 +124,20 @@ extension UserList:UITableViewDataSource{
         }
         
         
-        let  user = self.GitUsers[indexPath.row] as! UserInfo
+        let  realmObject = self.GitUsers[indexPath.row] as! MyRealObject
         
+        guard let user = realmObject.myStruct else{
+            return userCell
+        }
         self.userName.text = user.owner.login
         userCell.name.text = user.name
         userCell.comments.text = user.description
         if(user.owner.avatarURL.count > 0){
-            
+
            userCell.userImage.loadImageUsingCacheWithURLString(user.owner.avatarURL, placeHolder: nil)
-            
+
         }
-        
+
         if((user.language?.count ?? 0) > 0){
              userCell.lblTech.text = user.language
              userCell.viewTech.isHidden = false
@@ -110,10 +145,10 @@ extension UserList:UITableViewDataSource{
             userCell.lblTech.text = ""
             userCell.viewTech.isHidden = true
         }
-        
+
          userCell.lblBugs.text = "\(user.openIssuesCount)"
          userCell.lblViews.text = "\(user.watchersCount)"
-       
+
         
         return userCell
         
@@ -122,9 +157,7 @@ extension UserList:UITableViewDataSource{
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if(indexPath.row == self.GitUsers.count-1){
-            print(indexPath.row)
-           
-            print("yes mahendra")
+            
             if(self.isFetched && self.currentPageNumber == self.previousPageNumber){
                 self.activityIndicator.startAnimating()
                 self.currentPageNumber = currentPageNumber + 1
@@ -164,6 +197,7 @@ extension UIViewController
     
 }
 
+// catching images
 let imageCache = NSCache<NSString, UIImage>()
 extension UIImageView {
     func loadImageUsingCacheWithURLString(_ URLString: String, placeHolder: UIImage?) {
@@ -192,5 +226,12 @@ extension UIImageView {
                 }
             }).resume()
         }
+    }
+}
+
+// convert result to array
+extension Results {
+    func toArray<T>(type: T.Type) -> [T] {
+        return compactMap { $0 as? T }
     }
 }

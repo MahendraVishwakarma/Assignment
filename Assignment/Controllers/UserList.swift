@@ -9,10 +9,12 @@
 
 import UIKit
 import SVProgressHUD
+import RealmSwift
+import Realm
 
 class UserList: UIViewController {
 
-    var GitUsers = NSMutableArray()
+    var GitUsers = NSArray()
     var lastContentOffset: CGFloat = 0
     var currentPageNumber = 1
     var previousPageNumber = 1
@@ -22,6 +24,7 @@ class UserList: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
     }
     

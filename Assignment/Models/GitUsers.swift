@@ -52,6 +52,7 @@ struct UserInfo: Codable {
     let forks, openIssues, watchers: Int
     let defaultBranch: String
     
+    
     enum CodingKeys: String, CodingKey {
         case id
         case nodeID = "node_id"

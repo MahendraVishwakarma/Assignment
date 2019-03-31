@@ -59,6 +59,7 @@ public class WebServices{
                 do{
                     let decoder = JSONDecoder();
                     let object = try decoder.decode(T.self, from: serverData)
+                    
                     completion(Result.success(object))
                 } catch let parsingError {
                     completion(Result.failure(APIError.failedRequest(parsingError.localizedDescription)))
